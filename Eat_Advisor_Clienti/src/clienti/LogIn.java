@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -58,6 +61,7 @@ public class LogIn {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("LogIn");
@@ -96,6 +100,16 @@ public class LogIn {
 		frmLogin.getContentPane().add(lblNewLabel);
 		
 		JList result_list = new JList();
+		result_list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Lista ristoranti trovati"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		result_list.setSelectedIndex(1);
 		result_list.setBounds(284, 35, 140, 103);
 		frmLogin.getContentPane().add(result_list);
 		
@@ -137,6 +151,7 @@ public class LogIn {
 		
 		JButton btnCerca = new JButton("Cerca");
 		btnCerca.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent arg0) {
 				String nome = tf_nome.getText();
 				String tipologia = (String) cb_tipologia.getSelectedItem();
@@ -147,14 +162,31 @@ public class LogIn {
 				}else if((!nome.isEmpty())&&(tipologia.equals(""))) {
 					JOptionPane.showMessageDialog(message,"Ricerca per nome : " + nome);
 					restaurant_data = Clienti.search_func("nome", nome);
-					//System.out.println(restaurant_data.get(0).nome+" "+restaurant_data.get(1).nome);
+					System.out.println(restaurant_data.get(0).nome);
 					
 				//&&(!tipologia.equals(""))
 				}else if((nome.equals(""))&&(!tipologia.equals(""))){
 					JOptionPane.showMessageDialog(message,"Ricerca per tipologia : "+ tipologia);
 					restaurant_data = Clienti.search_func("tipologia", tipologia);
-					//System.out.println(restaurant_data.get(0).nome+" "+restaurant_data.get(1).nome);
+					System.out.println(restaurant_data.get(0).nome);
+					
 				}
+				
+				String [] values = new String[restaurant_data.size()];
+				int position;
+				for (int i = 0; i < restaurant_data.size(); i++) {
+					
+					values[i] = restaurant_data.get(i).nome;
+				}
+
+				result_list.setModel(new AbstractListModel() {
+					public int getSize() {return values.length;}
+					public Object getElementAt(int index) {return values[index];}
+					});
+				info_restaurant.setText("");
+			
+				
+			
 				
 			}
 		});
@@ -162,10 +194,22 @@ public class LogIn {
 		frmLogin.getContentPane().add(btnCerca);
 		
 		JButton btnInfo = new JButton("Info");
+		btnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int pos = result_list.getSelectedIndex();
+				info_restaurant.setText("Nome : "+restaurant_data.get(pos).nome+"\n"+"Indirizzo : "+restaurant_data.get(pos).indirizzo
+						+"\n"+"Tell : "+restaurant_data.get(pos).tell+"\n"+"Sito : "+restaurant_data.get(pos).sito
+						+"\n"+"Tipologia : "+restaurant_data.get(pos).tipologia+"\n"+restaurant_data.get(pos).commento);
+			}
+		});
 		btnInfo.setBounds(313, 149, 89, 23);
 		frmLogin.getContentPane().add(btnInfo);
 		
 		btnInvia = new JButton("Invia");
+		btnInvia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnInvia.setBounds(300, 445, 89, 23);
 		frmLogin.getContentPane().add(btnInvia);
 	}

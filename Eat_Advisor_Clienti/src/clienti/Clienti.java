@@ -167,20 +167,22 @@ public class Clienti {
 				pos = i;
 				if(ristoranti_list.get(i).contains(find)) {
 					result_list.add(new Ristorante_Struct(ristoranti_list.get(pos),ristoranti_list.get(pos+1),ristoranti_list.get(pos+2),
-							ristoranti_list.get(pos+3),ristoranti_list.get(pos+4)));
+							ristoranti_list.get(pos+3),ristoranti_list.get(pos+4),ristoranti_list.get(pos+5)));
 
 				}
-				i+=5;
+				//numero elementi Classe Ristorante_Struct
+				i+=6;
 			}	
 		}else if (reconizer.equals("tipologia")) {
 			int pos;
-			for(int i=4;i<ristoranti_list.size();i++) {
+			for(int i=4;i<ristoranti_list.size();) {
 				pos = i;
 				if(ristoranti_list.get(i).equals(find)) {
 					result_list.add(new Ristorante_Struct(ristoranti_list.get(pos-4),ristoranti_list.get(pos-3),ristoranti_list.get(pos-2),
-							ristoranti_list.get(pos-1),ristoranti_list.get(pos)));
+							ristoranti_list.get(pos-1),ristoranti_list.get(pos),ristoranti_list.get(pos+1)));
 				}
-				i+=5;
+				//numero elementi Classe Ristorante_Struct
+				i+=6;
 			}
 		}else return null; 
 		
