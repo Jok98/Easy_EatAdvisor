@@ -18,8 +18,8 @@ public class Reader_Writer {
 	
 	
 	Scanner scan;
-	File clienti_file;
-	File ristoranti_file;
+	static File clienti_file;
+	static File ristoranti_file;
 	
 	static Frame message = new Frame();
 	
@@ -64,5 +64,7 @@ public class Reader_Writer {
 		JOptionPane.showMessageDialog(message,"Utente registrato!");
 		
 	}
+	
+	
 
 }

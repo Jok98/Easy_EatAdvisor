@@ -32,7 +32,7 @@ public class LogIn {
 	private JTextField tf_nome;
 	private JComboBox cb_tipologia;
 	static Frame message = new Frame();
-	
+	static int pos;
 
 	ArrayList<Ristorante_Struct> restaurant_data = new ArrayList<Ristorante_Struct>();
 	/**
@@ -196,10 +196,12 @@ public class LogIn {
 		JButton btnInfo = new JButton("Info");
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int pos = result_list.getSelectedIndex();
+				pos = result_list.getSelectedIndex();
+				String tmp_comm = restaurant_data.get(pos).commento;
+				tmp_comm = tmp_comm.replaceAll("----", "\n");
 				info_restaurant.setText("Nome : "+restaurant_data.get(pos).nome+"\n"+"Indirizzo : "+restaurant_data.get(pos).indirizzo
 						+"\n"+"Tell : "+restaurant_data.get(pos).tell+"\n"+"Sito : "+restaurant_data.get(pos).sito
-						+"\n"+"Tipologia : "+restaurant_data.get(pos).tipologia+"\n"+restaurant_data.get(pos).commento);
+						+"\n"+"Tipologia : "+restaurant_data.get(pos).tipologia+"\n"+tmp_comm);
 			}
 		});
 		btnInfo.setBounds(313, 149, 89, 23);
@@ -208,6 +210,17 @@ public class LogIn {
 		btnInvia = new JButton("Invia");
 		btnInvia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String tmp_comm = ta_commento.getText();
+				if(tmp_comm.length()<257) {
+					try {
+						String comment = "ID : "+ Clienti.ID+"----Stelle : "+cb_star.getSelectedItem()+"----Commento : "+tmp_comm+"----";
+						Clienti.insert_comment(restaurant_data.get(pos).nome, comment);
+					} catch (IOException e) {
+					
+						e.printStackTrace();
+					}
+				}else JOptionPane.showMessageDialog(message,"Superata dimensione di 256 caratteri");
+
 			}
 		});
 		btnInvia.setBounds(300, 445, 89, 23);

@@ -11,8 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -37,6 +40,8 @@ public class Clienti {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	static Frame message = new Frame();
+	
+	static String ID;
 
 	/**
 	 * Launch the application.
@@ -105,12 +110,12 @@ public class Clienti {
 		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 	
-				String id = tf_nickname.getText();
+				ID = tf_nickname.getText();
 				String password = passwordField.getText();
 				for(int i = 5; i< clienti_list.size();) {
 					int pos = i;
 					//System.out.println(clienti_list.get(i));
-					if((clienti_list.get(i).equals(id))&&(clienti_list.get(pos+1).equals(password))) {
+					if((clienti_list.get(i).equals(ID))&&(clienti_list.get(pos+1).equals(password))) {
 						JOptionPane.showMessageDialog(message,"Accesso effettuato!");
 						login.frmLogin.setVisible(true);
 						frmClienti.setVisible(false);
@@ -187,6 +192,32 @@ public class Clienti {
 		}else return null; 
 		
 		return result_list;
+		
+	}
+	
+	public static void insert_comment(String nome, String commento) throws IOException {
+	
+		for(int i=0;i<ristoranti_list.size();) {
+			if(ristoranti_list.get(i).contains(nome)) {
+				String tmp = ristoranti_list.get(i+5);
+				ristoranti_list.remove(i+5);
+				ristoranti_list.add(i+5, tmp+"----"+commento);
+
+			}
+			i+=6;
+		}
+		BufferedWriter writer = new BufferedWriter(new FileWriter(ristoranti_file));
+
+		for (int i = 0 ; i< ristoranti_list.size(); i++) {
+		
+			writer.write(ristoranti_list.get(i)+" ll ");
+		}
+		//writer.write(data[7]);
+		writer.flush();
+		writer.close();
+		JOptionPane.showMessageDialog(message,"Commento inserito !");
+		
+		
 		
 	}
 	
