@@ -30,7 +30,8 @@ public class LogIn {
 	private JComboBox cb_tipologia;
 	static Frame message = new Frame();
 	
-	static ArrayList<String> restaurant_data;
+
+	ArrayList<Ristorante_Struct> restaurant_data = new ArrayList<Ristorante_Struct>();
 	/**
 	 * Launch the application.
 	 */
@@ -139,17 +140,20 @@ public class LogIn {
 			public void actionPerformed(ActionEvent arg0) {
 				String nome = tf_nome.getText();
 				String tipologia = (String) cb_tipologia.getSelectedItem();
+				
 				if((!nome.equals(""))&&(!tipologia.equals(""))) {
 					JOptionPane.showMessageDialog(message,"Ricerca valida solo su un campo !");
-				}else if((!nome.equals(""))&&(tipologia.equals(""))) {
+					
+				}else if((!nome.isEmpty())&&(tipologia.equals(""))) {
 					JOptionPane.showMessageDialog(message,"Ricerca per nome : " + nome);
 					restaurant_data = Clienti.search_func("nome", nome);
-					System.out.println(restaurant_data);
+					//System.out.println(restaurant_data.get(0).nome+" "+restaurant_data.get(1).nome);
+					
 				//&&(!tipologia.equals(""))
-				}else{
+				}else if((nome.equals(""))&&(!tipologia.equals(""))){
 					JOptionPane.showMessageDialog(message,"Ricerca per tipologia : "+ tipologia);
 					restaurant_data = Clienti.search_func("tipologia", tipologia);
-					System.out.println(restaurant_data);
+					//System.out.println(restaurant_data.get(0).nome+" "+restaurant_data.get(1).nome);
 				}
 				
 			}

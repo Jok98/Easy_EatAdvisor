@@ -159,23 +159,16 @@ public class Clienti {
 		
 	}
 	
-	public static ArrayList<String> search_func(String reconizer, String find) {
-		ArrayList<String> result_list = new ArrayList<String>();
-		if(reconizer.contains("nome")) {
+	public static ArrayList<Ristorante_Struct> search_func(String reconizer, String find) {
+		ArrayList<Ristorante_Struct> result_list = new ArrayList<Ristorante_Struct>();
+		if(reconizer.equals("nome")) {
 			int pos;
 			for(int i=0;i<ristoranti_list.size();) {
 				pos = i;
-				if(ristoranti_list.get(i).equals(find)) {
-					//add nome
-					result_list.add(ristoranti_list.get(pos-4));
-					//add indirizzo
-					result_list.add(ristoranti_list.get(pos-3));
-					//add tell
-					result_list.add(ristoranti_list.get(pos-2));
-					//add sito
-					result_list.add(ristoranti_list.get(pos-1));
-					//add tipologia
-					result_list.add(ristoranti_list.get(pos));
+				if(ristoranti_list.get(i).contains(find)) {
+					result_list.add(new Ristorante_Struct(ristoranti_list.get(pos),ristoranti_list.get(pos+1),ristoranti_list.get(pos+2),
+							ristoranti_list.get(pos+3),ristoranti_list.get(pos+4)));
+
 				}
 				i+=5;
 			}	
@@ -184,20 +177,13 @@ public class Clienti {
 			for(int i=4;i<ristoranti_list.size();i++) {
 				pos = i;
 				if(ristoranti_list.get(i).equals(find)) {
-					//add nome
-					result_list.add(ristoranti_list.get(pos-4));
-					//add indirizzo
-					result_list.add(ristoranti_list.get(pos-3));
-					//add tell
-					result_list.add(ristoranti_list.get(pos-2));
-					//add sito
-					result_list.add(ristoranti_list.get(pos-1));
-					//add tipologia
-					result_list.add(ristoranti_list.get(pos));
+					result_list.add(new Ristorante_Struct(ristoranti_list.get(pos-4),ristoranti_list.get(pos-3),ristoranti_list.get(pos-2),
+							ristoranti_list.get(pos-1),ristoranti_list.get(pos)));
 				}
 				i+=5;
 			}
-		}else result_list.add("Nessun risultato trovato");
+		}else return null; 
+		
 		return result_list;
 		
 	}
