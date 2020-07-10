@@ -1,8 +1,11 @@
 package clienti;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -13,13 +16,14 @@ import java.awt.event.ActionEvent;
 public class Registrazione {
 
 	static JFrame frmRegistrazione;
-	private JPasswordField passwordField;
-	private JTextField tf_nome;
-	private JTextField tf_cognome;
-	private JTextField tf_comune;
-	private JTextField tf_sigla_prov;
-	private JTextField tf_email;
-	private JTextField tf_nikname;
+	private static JPasswordField passwordField;
+	private static JTextField tf_nome;
+	private static JTextField tf_cognome;
+	private static JTextField tf_comune;
+	private static JTextField tf_sigla_prov;
+	private static JTextField tf_email;
+	private static JTextField tf_nikname;
+	static Frame message = new Frame();
 
 	/**
 	 * Launch the application.
@@ -124,17 +128,28 @@ public class Registrazione {
 			public void actionPerformed(ActionEvent arg0) {
 				//fare controllo dati inseriti
 				//automatizzare sigla provincia
-				try {
-				Cliente_Struct user = new Cliente_Struct(tf_nome.getText(),tf_cognome.getText(),tf_comune.getText(),tf_sigla_prov.getText(),tf_email.getText(),tf_nikname.getText(),passwordField.getText());
-				String[] user_data = user.get_user_data();
-				//System.out.println(user_data[0]+" || "+ user.password);
+				String nome = tf_nome.getText();
+				String cognome = tf_cognome.getText();
+				String comune = tf_comune.getText();
+				String sigla_prov = tf_sigla_prov.getText();
+				String email = tf_email.getText();
+				String nickname = tf_nikname.getText();
+				String password = passwordField.getText();
+				if((nome.isEmpty())||(cognome.isEmpty())||(comune.isEmpty())||(sigla_prov.isEmpty())||(email.isEmpty())||(nickname.isEmpty())||(password.isEmpty())) {
+					JOptionPane.showMessageDialog(message,"Dati mancanti !");
+				}else if((!email.contains("@"))||(!email.contains("."))) {JOptionPane.showMessageDialog(message,"Campo email errato !");
 				
-				Reader_Writer.registra_utente(Clienti.clienti_file, user_data);
+				}else {
+					try {
+						Cliente_Struct user = new Cliente_Struct(nome,cognome,comune,
+								sigla_prov,email,nickname,password);
+						String[] user_data = user.get_user_data();
+						//System.out.println(user_data[0]+" || "+ user.password);
 				
-				Clienti.read_all_files();
-				} catch (IOException e) {
+						Reader_Writer.registra_utente(Clienti.clienti_file, user_data);
 				
-					e.printStackTrace();
+						Clienti.read_all_files();
+					} catch (IOException e) {e.printStackTrace();}
 				}
 			}
 		});
@@ -144,11 +159,32 @@ public class Registrazione {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				clear_field();
 				frmRegistrazione.dispose();
 				Clienti.frmClienti.setVisible(true);
 			}
 		});
-		btnBack.setBounds(399, 347, 89, 23);
+		btnBack.setBounds(10, 347, 89, 23);
 		frmRegistrazione.getContentPane().add(btnBack);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clear_field();
+			}
+		});
+		btnClear.setBounds(275, 347, 89, 23);
+		frmRegistrazione.getContentPane().add(btnClear);
+	}
+	
+	public static void clear_field() {
+		tf_nome.setText("");
+		tf_cognome.setText("");
+		tf_comune.setText("");
+		tf_sigla_prov.setText("");
+		tf_email.setText("");
+		tf_nikname.setText("");
+		passwordField.setText("");
+		
 	}
 }

@@ -31,6 +31,7 @@ public class LogIn {
 	JTextArea ta_commento;
 	private JTextField tf_nome;
 	private JComboBox cb_tipologia;
+	private JList result_list;
 	static Frame message = new Frame();
 	static int pos;
 
@@ -71,27 +72,27 @@ public class LogIn {
 		
 		JLabel lblRicerca = new JLabel("Ricerca");
 		lblRicerca.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblRicerca.setBounds(77, 11, 86, 14);
+		lblRicerca.setBounds(104, 11, 86, 14);
 		frmLogin.getContentPane().add(lblRicerca);
 		
 		JLabel lblNome = new JLabel("Nome :");
 		lblNome.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		lblNome.setBounds(10, 36, 46, 14);
+		lblNome.setBounds(34, 36, 46, 14);
 		frmLogin.getContentPane().add(lblNome);
 		
 		JLabel lblTipologia = new JLabel("Tipologia :");
 		lblTipologia.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		lblTipologia.setBounds(10, 73, 60, 14);
+		lblTipologia.setBounds(34, 73, 60, 14);
 		frmLogin.getContentPane().add(lblTipologia);
 		
 		tf_nome = new JTextField();
-		tf_nome.setBounds(77, 33, 86, 20);
+		tf_nome.setBounds(104, 32, 86, 20);
 		frmLogin.getContentPane().add(tf_nome);
 		tf_nome.setColumns(10);
 		
 		cb_tipologia = new JComboBox();
 		cb_tipologia.setModel(new DefaultComboBoxModel(new String[] {"", "Italiano", "Etnico", "Fusion"}));
-		cb_tipologia.setBounds(77, 69, 86, 22);
+		cb_tipologia.setBounds(104, 68, 86, 22);
 		frmLogin.getContentPane().add(cb_tipologia);
 		
 		JLabel lblNewLabel = new JLabel("Lista ristoranti");
@@ -99,16 +100,8 @@ public class LogIn {
 		lblNewLabel.setBounds(284, 11, 140, 14);
 		frmLogin.getContentPane().add(lblNewLabel);
 		
-		JList result_list = new JList();
-		result_list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Lista ristoranti trovati"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		result_list = new JList();
+		clean_list();
 		result_list.setSelectedIndex(1);
 		result_list.setBounds(284, 35, 140, 103);
 		frmLogin.getContentPane().add(result_list);
@@ -190,7 +183,7 @@ public class LogIn {
 				
 			}
 		});
-		btnCerca.setBounds(77, 131, 89, 23);
+		btnCerca.setBounds(104, 130, 89, 23);
 		frmLogin.getContentPane().add(btnCerca);
 		
 		JButton btnInfo = new JButton("Info");
@@ -215,6 +208,7 @@ public class LogIn {
 					try {
 						String comment = "ID : "+ Clienti.ID+"----Stelle : "+cb_star.getSelectedItem()+"----Commento : "+tmp_comm+"----";
 						Clienti.insert_comment(restaurant_data.get(pos).nome, comment);
+						ta_commento.setText("");
 					} catch (IOException e) {
 					
 						e.printStackTrace();
@@ -225,5 +219,33 @@ public class LogIn {
 		});
 		btnInvia.setBounds(300, 445, 89, 23);
 		frmLogin.getContentPane().add(btnInvia);
+		
+		JButton btnlogout = new JButton("Logout");
+		btnlogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Clienti.frmClienti.setVisible(true);
+				clean_list();
+				tf_nome.setText("");
+				cb_tipologia.setSelectedIndex(0);
+				ta_commento.setText("");
+				info_restaurant.setText("");
+				frmLogin.dispose();
+			}
+		});
+		btnlogout.setBounds(5, 130, 89, 23);
+		frmLogin.getContentPane().add(btnlogout);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void clean_list() {
+		result_list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Lista ristoranti trovati"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
 	}
 }

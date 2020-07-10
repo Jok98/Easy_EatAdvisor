@@ -109,7 +109,6 @@ public class Clienti {
 		JButton btnAccedi = new JButton("Accedi");
 		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	
 				ID = tf_nickname.getText();
 				String password = passwordField.getText();
 				for(int i = 5; i< clienti_list.size();) {
@@ -118,6 +117,8 @@ public class Clienti {
 					if((clienti_list.get(i).equals(ID))&&(clienti_list.get(pos+1).equals(password))) {
 						JOptionPane.showMessageDialog(message,"Accesso effettuato!");
 						login.frmLogin.setVisible(true);
+						tf_nickname.setText("");
+						passwordField.setText("");
 						frmClienti.setVisible(false);
 						break;
 					}
