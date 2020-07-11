@@ -1,5 +1,6 @@
 package clienti;
 
+
 public class Ristorante_Struct {
 	String nome;
 	String indirizzo;

@@ -1,15 +1,12 @@
 package clienti;
-
 import java.awt.EventQueue;
 import java.awt.Frame;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +19,6 @@ import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
-
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -31,7 +27,7 @@ public class Clienti {
 	static JFrame frmClienti;
 	Registrazione Registrazione = new Registrazione();
 	LogIn login = new LogIn();
-	
+
 	static ArrayList<String> clienti_list = new ArrayList<String>();
 	static ArrayList<String> ristoranti_list = new ArrayList<String>();
 	static File clienti_file;
@@ -53,6 +49,15 @@ public class Clienti {
 				try {
 					Clienti window = new Clienti();
 					window.frmClienti.setVisible(true);
+					File findme = new File("Findme.txt");
+					String data_file_path = findme.getAbsolutePath();
+					String clienti_file_path = data_file_path.replaceAll("Findme.txt", "data\\\\Utenti.data.txt");
+					String ristoranti_file_path = data_file_path.replaceAll("Findme.txt", "data\\\\EatAdvisor.data.txt");
+					System.out.println(clienti_file_path +" "+ ristoranti_file_path);
+					clienti_file = new File(clienti_file_path);
+					ristoranti_file = new File(ristoranti_file_path);
+					//JOptionPane.showMessageDialog(message,clienti_file_path);
+					read_all_files();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -64,17 +69,9 @@ public class Clienti {
 	 * Create the application.
 	 * @throws FileNotFoundException 
 	 */
-	public Clienti() throws FileNotFoundException {
+	public Clienti()  {
 		initialize();
 		
-		File findme = new File("Findme.txt");
-		String data_file_path = findme.getAbsolutePath();
-		String clienti_file_path = data_file_path.replaceAll("Findme.txt", "data\\\\Utenti.data.txt");
-		String ristoranti_file_path = data_file_path.replaceAll("Findme.txt", "data\\\\EatAdvisor.data.txt");
-		System.out.println(clienti_file_path +" "+ ristoranti_file_path);
-		clienti_file = new File(clienti_file_path);
-		ristoranti_file = new File(ristoranti_file_path);
-		read_all_files();
 		}
 
 	/**

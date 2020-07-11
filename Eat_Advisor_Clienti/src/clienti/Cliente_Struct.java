@@ -1,5 +1,6 @@
 package clienti;
 
+
 public class Cliente_Struct {
 	String nome;
 	String cognome;

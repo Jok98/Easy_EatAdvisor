@@ -1,5 +1,6 @@
 package clienti;
 
+
 import java.awt.EventQueue;
 import java.awt.Frame;
 
@@ -137,11 +138,11 @@ public class Registrazione {
 		JButton btnIscrizione = new JButton("Iscriviti");
 		btnIscrizione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//fare controllo dati inseriti
+				String regex = "\\s+";
 				//automatizzare sigla provincia
-				String nome = tf_nome.getText();
-				String cognome = tf_cognome.getText();
-				String comune = tf_comune.getText();
+				String nome = (!tf_nome.getText().matches("[a-zA-Z]+"))? "": tf_nome.getText() ;
+				String cognome = (!tf_cognome.getText().matches("[a-zA-Z]+"))? "": tf_cognome.getText() ;
+				String comune = (!tf_comune.getText().matches("[a-zA-Z]+"))? "": tf_comune.getText() ;
 				String sigla_prov = (String) cb_sigla_prov.getSelectedItem();
 				String email = tf_email.getText();
 				String nickname = tf_nikname.getText();
