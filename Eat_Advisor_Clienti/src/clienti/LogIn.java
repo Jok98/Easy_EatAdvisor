@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class LogIn {
 
@@ -65,6 +66,7 @@ public class LogIn {
 	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frmLogin = new JFrame();
+		frmLogin.getContentPane().setBackground(SystemColor.info);
 		frmLogin.setTitle("LogIn");
 		frmLogin.setBounds(100, 100, 450, 520);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

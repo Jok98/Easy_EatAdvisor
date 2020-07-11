@@ -22,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 
 import java.awt.Font;
+import java.awt.SystemColor;
 
 public class Clienti {
 
@@ -81,29 +82,30 @@ public class Clienti {
 	 */
 	private void initialize() {
 		frmClienti = new JFrame();
+		frmClienti.getContentPane().setBackground(SystemColor.info);
 		frmClienti.setResizable(false);
 		frmClienti.setTitle("Clienti");
-		frmClienti.setBounds(100, 100, 450, 300);
+		frmClienti.setBounds(100, 100, 412, 213);
 		frmClienti.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmClienti.getContentPane().setLayout(null);
 		
 		JLabel lblNickname = new JLabel("Nickname : ");
 		lblNickname.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNickname.setBounds(110, 72, 86, 14);
+		lblNickname.setBounds(113, 53, 86, 14);
 		frmClienti.getContentPane().add(lblNickname);
 		
 		tf_nickname = new JTextField();
-		tf_nickname.setBounds(216, 69, 86, 20);
+		tf_nickname.setBounds(219, 50, 86, 20);
 		frmClienti.getContentPane().add(tf_nickname);
 		tf_nickname.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password :");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPassword.setBounds(110, 116, 86, 14);
+		lblPassword.setBounds(113, 97, 86, 14);
 		frmClienti.getContentPane().add(lblPassword);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(216, 113, 86, 20);
+		passwordField.setBounds(219, 94, 86, 20);
 		frmClienti.getContentPane().add(passwordField);
 		
 		JButton btnAccedi = new JButton("Accedi");
@@ -126,7 +128,7 @@ public class Clienti {
 				}
 			}
 		});
-		btnAccedi.setBounds(177, 237, 89, 23);
+		btnAccedi.setBounds(130, 147, 89, 23);
 		frmClienti.getContentPane().add(btnAccedi);
 		
 		JButton btnRegistrati = new JButton("Registrati");
@@ -136,7 +138,7 @@ public class Clienti {
 				Registrazione.frmRegistrazione.setVisible(true);
 			}
 		});
-		btnRegistrati.setBounds(13, 237, 89, 23);
+		btnRegistrati.setBounds(10, 147, 89, 23);
 		frmClienti.getContentPane().add(btnRegistrati);
 		
 		JButton btnNoLogIn = new JButton("Accesso libero");
@@ -149,7 +151,7 @@ public class Clienti {
 				frmClienti.setVisible(false);
 			}
 		});
-		btnNoLogIn.setBounds(319, 237, 115, 23);
+		btnNoLogIn.setBounds(261, 147, 127, 23);
 		frmClienti.getContentPane().add(btnNoLogIn);
 		
 		

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.SystemColor;
 
 public class Registrazione {
 
@@ -56,9 +57,10 @@ public class Registrazione {
 	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frmRegistrazione = new JFrame();
+		frmRegistrazione.getContentPane().setBackground(SystemColor.info);
 		frmRegistrazione.setResizable(false);
 		frmRegistrazione.setTitle("Registrazione");
-		frmRegistrazione.setBounds(100, 100, 514, 420);
+		frmRegistrazione.setBounds(100, 100, 384, 420);
 		frmRegistrazione.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistrazione.getContentPane().setLayout(null);
 		
