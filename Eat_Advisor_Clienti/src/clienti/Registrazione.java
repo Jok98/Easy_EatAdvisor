@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Registrazione {
 
@@ -20,9 +22,9 @@ public class Registrazione {
 	private static JTextField tf_nome;
 	private static JTextField tf_cognome;
 	private static JTextField tf_comune;
-	private static JTextField tf_sigla_prov;
 	private static JTextField tf_email;
 	private static JTextField tf_nikname;
+	private static JComboBox cb_sigla_prov;
 	static Frame message = new Frame();
 
 	/**
@@ -51,6 +53,7 @@ public class Registrazione {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frmRegistrazione = new JFrame();
 		frmRegistrazione.setResizable(false);
@@ -104,10 +107,16 @@ public class Registrazione {
 		frmRegistrazione.getContentPane().add(tf_comune);
 		tf_comune.setColumns(10);
 		
-		tf_sigla_prov = new JTextField();
-		tf_sigla_prov.setBounds(151, 139, 86, 20);
-		frmRegistrazione.getContentPane().add(tf_sigla_prov);
-		tf_sigla_prov.setColumns(10);
+		JComboBox cb_sigla_prov = new JComboBox();
+		cb_sigla_prov.setModel(new DefaultComboBoxModel(new String[] {"", "AG", "AL", "AN", "AO", "AQ", "AR", "AP", "AT", "AV", "BA", "BT",
+				"BL", "BN", "BG", "BI", "BO", "BZ", "BS", "BR", "CA", "CL", "CB", "CI", "CE", "CT", "CZ", "CH", "CO", "CS", "CR", "KR",
+				"CN", "EN", "FM", "FE", "FI", "FG", "FC", "FR", "GE", "GO", "GR", "IM", "IS", "SP", "LT", "LE", "LC", "LI", "LO", "LU", 
+				"MC", "MN", "MS", "MT", "VS", "ME", "MI", "MO", "MB", "NA", "NO", "NU", "OG", "OT", "OR", "PD", "PA", "PR", "PV", "PG", 
+				"PU", "PE", "PC", "PI", "PT", "PN", "PZ", "PO", "RG", "RA", "RC", "RE", "RI", "RN", "Roma", "RO", "SA", "SS", "SV", "SI", 
+				"SR", "SO", "TA", "TE", "TR", "TO", "TP", "TN", "TV", "TS", "UD", "VA", "VE", "VB", "VC", "VR", "VV", "VI", "VT"}));
+		cb_sigla_prov.setSelectedIndex(0);
+		cb_sigla_prov.setBounds(151, 138, 86, 22);
+		frmRegistrazione.getContentPane().add(cb_sigla_prov);
 		
 		tf_email = new JTextField();
 		tf_email.setBounds(151, 181, 86, 20);
@@ -131,11 +140,11 @@ public class Registrazione {
 				String nome = tf_nome.getText();
 				String cognome = tf_cognome.getText();
 				String comune = tf_comune.getText();
-				String sigla_prov = tf_sigla_prov.getText();
+				String sigla_prov = (String) cb_sigla_prov.getSelectedItem();
 				String email = tf_email.getText();
 				String nickname = tf_nikname.getText();
 				String password = passwordField.getText();
-				if((nome.isEmpty())||(cognome.isEmpty())||(comune.isEmpty())||(sigla_prov.isEmpty())||(email.isEmpty())||(nickname.isEmpty())||(password.isEmpty())) {
+				if((nome.isEmpty())||(cognome.isEmpty())||(comune.isEmpty())||(sigla_prov.equals(""))||(email.isEmpty())||(nickname.isEmpty())||(password.isEmpty())) {
 					JOptionPane.showMessageDialog(message,"Dati mancanti !");
 				}else if((!email.contains("@"))||(!email.contains("."))) {JOptionPane.showMessageDialog(message,"Campo email errato !");
 				
@@ -175,13 +184,14 @@ public class Registrazione {
 		});
 		btnClear.setBounds(275, 347, 89, 23);
 		frmRegistrazione.getContentPane().add(btnClear);
+		
+		
 	}
 	
 	public static void clear_field() {
 		tf_nome.setText("");
 		tf_cognome.setText("");
 		tf_comune.setText("");
-		tf_sigla_prov.setText("");
 		tf_email.setText("");
 		tf_nikname.setText("");
 		passwordField.setText("");
