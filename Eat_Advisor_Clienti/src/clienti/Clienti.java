@@ -17,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -29,8 +31,6 @@ public class Clienti {
 	static JFrame frmClienti;
 	Registrazione Registrazione = new Registrazione();
 	LogIn login = new LogIn();
-	static Reader_Writer R_W ;
-	
 	
 	static ArrayList<String> clienti_list = new ArrayList<String>();
 	static ArrayList<String> ristoranti_list = new ArrayList<String>();
@@ -160,13 +160,47 @@ public class Clienti {
 		
 		
 	}
+	public static ArrayList<String> read_file(File file, ArrayList<String> data_list ) throws FileNotFoundException {
+		
+		Scanner scan = new Scanner(file).useDelimiter(" ll ");
+		while(scan.hasNextLine()) {
+			try {
+				data_list.add(scan.next());
+			
+			}catch(NoSuchElementException e ) {
+				break;
+			}
+		}
+		
+		System.out.println(data_list);
+		//System.out.println(data_list.get(7));
+		return data_list;
+		
+	}
+	
+	public static void registra_utente(File file, String[] data) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+		//System.out.println(clienti_file.getAbsolutePath());
+		//vedere per eliminare righe vuote
+		writer.newLine();
+		for (int i = 0 ; i< data.length; i++) {
+			/*
+			if(i!= data.length-1) {writer.write(data[i]+" ll ");
+			}else writer.write(data[i]);*/
+			writer.write(data[i]+" ll ");
+		}
+		//writer.write(data[7]);
+		writer.flush();
+		writer.close();
+		JOptionPane.showMessageDialog(message,"Utente registrato!");
+		
+	}
 	
 	public static void read_all_files() throws FileNotFoundException {
 		clienti_list.clear();
 		ristoranti_list.clear();
-		R_W = new Reader_Writer(clienti_file,ristoranti_file);
-		clienti_list = R_W.read_file(clienti_file,clienti_list );
-		ristoranti_list = R_W.read_file(ristoranti_file,ristoranti_list);
+		clienti_list = read_file(clienti_file,clienti_list );
+		ristoranti_list = read_file(ristoranti_file,ristoranti_list);
 
 		
 	}

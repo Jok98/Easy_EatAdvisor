@@ -157,7 +157,7 @@ public class Registrazione {
 						String[] user_data = user.get_user_data();
 						//System.out.println(user_data[0]+" || "+ user.password);
 				
-						Reader_Writer.registra_utente(Clienti.clienti_file, user_data);
+						Clienti.registra_utente(Clienti.clienti_file, user_data);
 				
 						Clienti.read_all_files();
 					} catch (IOException e) {e.printStackTrace();}
@@ -171,6 +171,7 @@ public class Registrazione {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				clear_field();
+				cb_sigla_prov.setSelectedIndex(0);
 				frmRegistrazione.dispose();
 				Clienti.frmClienti.setVisible(true);
 			}
@@ -182,6 +183,7 @@ public class Registrazione {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				clear_field();
+				cb_sigla_prov.setSelectedIndex(0);
 			}
 		});
 		btnClear.setBounds(275, 347, 89, 23);
@@ -197,6 +199,7 @@ public class Registrazione {
 		tf_email.setText("");
 		tf_nikname.setText("");
 		passwordField.setText("");
+		
 		
 	}
 }

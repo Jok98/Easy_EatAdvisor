@@ -110,7 +110,7 @@ public class LogIn {
 		frmLogin.getContentPane().add(result_list);
 		JScrollPane scroll_list = new JScrollPane (result_list);
 		scroll_list.setBounds(284, 35, 140, 103);
-		frmLogin.add(scroll_list);
+		frmLogin.getContentPane().add(scroll_list);
 		
 		JLabel lblNewLabel_1 = new JLabel("Info Ristorante");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -120,11 +120,11 @@ public class LogIn {
 		JTextArea info_restaurant = new JTextArea();
 		info_restaurant.setEditable(false);
 		info_restaurant.setLineWrap(true);
-		info_restaurant.setBounds(10, 234, 183, 236);
+		info_restaurant.setBounds(10, 234, 200, 236);
 		frmLogin.getContentPane().add(info_restaurant);
 		JScrollPane scroll_info = new JScrollPane (info_restaurant);
-		scroll_info.setBounds(10, 234, 183, 236);
-		frmLogin.add(scroll_info);
+		scroll_info.setBounds(10, 234, 200, 236);
+		frmLogin.getContentPane().add(scroll_info);
 		
 		JLabel lblNewLabel_2 = new JLabel("Recensione");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -137,7 +137,7 @@ public class LogIn {
 		frmLogin.getContentPane().add(ta_commento);
 		JScrollPane scroll_commento = new JScrollPane (ta_commento);
 		scroll_commento.setBounds(257, 262, 167, 172);
-		frmLogin.add(scroll_commento);
+		frmLogin.getContentPane().add(scroll_commento);
 		
 		JLabel lblNewLabel_3 = new JLabel("Stelle :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 12));
@@ -160,7 +160,7 @@ public class LogIn {
 			public void actionPerformed(ActionEvent arg0) {
 				String nome = tf_nome.getText();
 				String tipologia = (String) cb_tipologia.getSelectedItem();
-				
+				try {
 				if((!nome.equals(""))&&(!tipologia.equals(""))) {
 					JOptionPane.showMessageDialog(message,"Ricerca valida solo su un campo !");
 					
@@ -173,7 +173,6 @@ public class LogIn {
 				}else if((nome.equals(""))&&(!tipologia.equals(""))){
 					JOptionPane.showMessageDialog(message,"Ricerca per tipologia : "+ tipologia);
 					restaurant_data = Clienti.search_func("tipologia", tipologia);
-					System.out.println(restaurant_data.get(0).nome);
 					
 				}
 				
@@ -189,8 +188,8 @@ public class LogIn {
 					public Object getElementAt(int index) {return values[index];}
 					});
 				info_restaurant.setText("");
-			
-				
+				}catch(IndexOutOfBoundsException e) {JOptionPane.showMessageDialog(message,"Nessun ristorante trovato");}
+				if(restaurant_data.isEmpty())JOptionPane.showMessageDialog(message,"Nessun ristorante trovato");
 			
 				
 			}
@@ -240,6 +239,8 @@ public class LogIn {
 				tf_nome.setText("");
 				cb_tipologia.setSelectedIndex(0);
 				ta_commento.setText("");
+				cb_star.setSelectedIndex(0);
+				cb_tipologia.setSelectedIndex(0);
 				info_restaurant.setText("");
 				frmLogin.dispose();
 			}
