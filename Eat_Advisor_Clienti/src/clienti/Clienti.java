@@ -111,6 +111,7 @@ public class Clienti {
 		JButton btnAccedi = new JButton("Accedi");
 		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Boolean error = false;
 				ID = tf_nickname.getText();
 				String password = passwordField.getText();
 				for(int i = 5; i< clienti_list.size();) {
@@ -122,10 +123,13 @@ public class Clienti {
 						tf_nickname.setText("");
 						passwordField.setText("");
 						frmClienti.setVisible(false);
+						error = false;
 						break;
 					}
 					i+=7;
+					error = true;
 				}
+				if(error==true) {JOptionPane.showMessageDialog(message,"Dati inseriti errati!");}
 			}
 		});
 		btnAccedi.setBounds(130, 147, 89, 23);

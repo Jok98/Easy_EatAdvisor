@@ -19,10 +19,11 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class LogIn {
 
@@ -107,6 +108,9 @@ public class LogIn {
 		result_list.setSelectedIndex(1);
 		result_list.setBounds(284, 35, 140, 103);
 		frmLogin.getContentPane().add(result_list);
+		JScrollPane scroll_list = new JScrollPane (result_list);
+		scroll_list.setBounds(284, 35, 140, 103);
+		frmLogin.add(scroll_list);
 		
 		JLabel lblNewLabel_1 = new JLabel("Info Ristorante");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -118,6 +122,9 @@ public class LogIn {
 		info_restaurant.setLineWrap(true);
 		info_restaurant.setBounds(10, 234, 183, 236);
 		frmLogin.getContentPane().add(info_restaurant);
+		JScrollPane scroll_info = new JScrollPane (info_restaurant);
+		scroll_info.setBounds(10, 234, 183, 236);
+		frmLogin.add(scroll_info);
 		
 		JLabel lblNewLabel_2 = new JLabel("Recensione");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -128,6 +135,9 @@ public class LogIn {
 		ta_commento.setLineWrap(true);
 		ta_commento.setBounds(257, 262, 167, 172);
 		frmLogin.getContentPane().add(ta_commento);
+		JScrollPane scroll_commento = new JScrollPane (ta_commento);
+		scroll_commento.setBounds(257, 262, 167, 172);
+		frmLogin.add(scroll_commento);
 		
 		JLabel lblNewLabel_3 = new JLabel("Stelle :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 12));
@@ -236,6 +246,10 @@ public class LogIn {
 		});
 		btnlogout.setBounds(5, 130, 89, 23);
 		frmLogin.getContentPane().add(btnlogout);
+		
+		JList list = new JList();
+		list.setBounds(400, 36, 24, 103);
+		frmLogin.getContentPane().add(list);
 	}
 	
 	@SuppressWarnings("unchecked")
