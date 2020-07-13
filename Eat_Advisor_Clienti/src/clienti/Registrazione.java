@@ -1,9 +1,7 @@
 package clienti;
 
-
 import java.awt.EventQueue;
 import java.awt.Frame;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +15,15 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.SystemColor;
 
+/**
+ * 
+ * @author Moi Matteo 737574 Varese
+ * La classe permette all'utente di iscriversi tramite l'inserimento dei dati richiesti; su di essi vengono effettuati dei controlloi :<br>
+ * - nome, cognome e comune possono contenere solo caratteri alfabetici<br>
+ * - email deve contenere obbligatoriamente "@" "."<br>
+ * Si richiama poi il metodo della classe Clienti per registrare l'utente nel file Clienti.data.txt
+ *
+ */
 public class Registrazione {
 
 	static JFrame frmRegistrazione;
@@ -156,7 +163,6 @@ public class Registrazione {
 						Cliente_Struct user = new Cliente_Struct(nome,cognome,comune,
 								sigla_prov,email,nickname,password);
 						String[] user_data = user.get_user_data();
-						//System.out.println(user_data[0]+" || "+ user.password);
 				
 						Clienti.registra_utente(Clienti.clienti_file, user_data);
 				

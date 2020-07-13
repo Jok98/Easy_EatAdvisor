@@ -25,7 +25,13 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-
+/**
+ * 
+ * @author Moi Matteo 737574 Varese
+ * La clasee permette di  ricercare(btnCerca) i ristoranti tramite nome o tipologia gli eventuali risultati vengono poi mostrati<br>
+ * nella result_list nella quale poi l'utente potrà scegliere un singolo ristorante di cui visualizare le informazioni(btnInfo) e le recensioni<br>
+ * se l'utente ha effettuato l'accesso al frame LogIn tramite credenziali avrà anche la possibilità di effettuare un recensione(btnInvia)
+ */
 public class LogIn {
 
 	JFrame frmLogin;

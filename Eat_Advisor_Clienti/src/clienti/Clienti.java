@@ -22,6 +22,15 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.SystemColor;
 
+/**
+ * 
+ * @author Moi Matteo 737574 Varese<br>
+ * La classe ottiene in modo automatico il path dei fileClienti & EatAdvisor contenuti nella directory data<br>
+ * I file vengono letti e salvati in degli arraylist tramite metodo read_all_files() per permetterne un utilizzo più pratico a tutte le classi<br>
+ * Tramite GUI è possibile aprire il frame per la registrazione(Registrazione) o accedere a quello di ricerca (LogIn) senza credenziali(ma con la funzionalità di recensione bloccata)<br>
+ * oppure con credenziali (ciò permetterà il completo utilizzo del frame LogIn)<br>
+ * 
+ */
 public class Clienti {
 
 	static JFrame frmClienti;
@@ -157,6 +166,15 @@ public class Clienti {
 		
 		
 	}
+	/**
+	 * 
+	 * @param file<br>
+	 * @param data_list<br>
+	 * @return data_list<br>
+	 * @throws FileNotFoundException<br>
+	 * inserisce all'interno di un'arraylistper ogni index un singolo dato<br>
+	 * 
+	 */
 	public static ArrayList<String> read_file(File file, ArrayList<String> data_list ) throws FileNotFoundException {
 		
 		Scanner scan = new Scanner(file).useDelimiter(" ll ");
@@ -170,29 +188,29 @@ public class Clienti {
 		}
 		
 		System.out.println(data_list);
-		//System.out.println(data_list.get(7));
 		return data_list;
 		
 	}
-	
+	/**
+	 * Salva nel  file Clienti.data.txt i dati inseriti dall'utente nel frame Registrazione<br>
+	 */
 	public static void registra_utente(File file, String[] data) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 		//System.out.println(clienti_file.getAbsolutePath());
-		//vedere per eliminare righe vuote
 		writer.newLine();
 		for (int i = 0 ; i< data.length; i++) {
-			/*
-			if(i!= data.length-1) {writer.write(data[i]+" ll ");
-			}else writer.write(data[i]);*/
 			writer.write(data[i]+" ll ");
 		}
-		//writer.write(data[7]);
 		writer.flush();
 		writer.close();
 		JOptionPane.showMessageDialog(message,"Utente registrato!");
 		
 	}
-	
+	/**
+	 * 
+	 * @throws FileNotFoundException
+	 * Salva all'interno di una stringa di array il contenuto del file indicato<br>
+	 */
 	public static void read_all_files() throws FileNotFoundException {
 		clienti_list.clear();
 		ristoranti_list.clear();
@@ -201,7 +219,12 @@ public class Clienti {
 
 		
 	}
-	
+	/**
+	 * 
+	 * @param reconizer permette di riconoscere se effettuare la ricerca del ristorante tramite nome o tipologia<br>
+	 * @param find indica il dato che viene utilizzato per ricercare i ristoranti<br>
+	 * @return result_list arraylist contenente tutti i dati dei ristoranti che hanno avuto riscontro con la ricerca<br>
+	 */
 	public static ArrayList<Ristorante_Struct> search_func(String reconizer, String find) {
 		ArrayList<Ristorante_Struct> result_list = new ArrayList<Ristorante_Struct>();
 		if(reconizer.equals("nome")) {
@@ -232,7 +255,15 @@ public class Clienti {
 		return result_list;
 		
 	}
-	
+	/**
+	 * 
+	 * @param nome inviato dalla classe LogIn<br>
+	 * @param commento  inviato dalla classe LogIn<br>
+	 * @throws IOException
+	 * Il metodo modifica la lista ristoranti_list contenente tutti i dati del file EatAdvisor e fa una sovrascrittura della recensione <br>
+	 * (aggiungendo il nuovo commento)del ristorante indicato dal parametro nome <br>
+	 * 
+	 */
 	public static void insert_comment(String nome, String commento) throws IOException {
 	
 		for(int i=0;i<ristoranti_list.size();) {
@@ -250,7 +281,6 @@ public class Clienti {
 		
 			writer.write(ristoranti_list.get(i)+" ll ");
 		}
-		//writer.write(data[7]);
 		writer.flush();
 		writer.close();
 		JOptionPane.showMessageDialog(message,"Commento inserito !");

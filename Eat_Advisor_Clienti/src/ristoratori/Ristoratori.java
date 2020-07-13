@@ -17,7 +17,12 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Font;
-
+/**
+ * 
+ * @author Moi Matteo 737574 Varese
+ *	La classe ottiene in modo automatico il path del file EatAdvisor contenuti nella directory data<br>
+ * Il metodo check_data() effettua un controllo su tutti i dati inseriti dall'utente per l'iscrizione del ristorante e se sono corretti lo inserisce nel file EatAdvisor.data.txt
+ */
 public class Ristoratori {
 	
 	private JFrame frmRistorante;
