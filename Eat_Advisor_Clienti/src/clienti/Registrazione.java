@@ -18,7 +18,7 @@ import java.awt.SystemColor;
 /**
  * 
  * @author Moi Matteo 737574 Varese
- * La classe permette all'utente di iscriversi tramite l'inserimento dei dati richiesti; su di essi vengono effettuati dei controlloi :<br>
+ * La classe permette all'utente di iscriversi tramite l'inserimento dei dati richiesti; su di essi vengono effettuati dei controlli :<br>
  * - nome, cognome e comune possono contenere solo caratteri alfabetici<br>
  * - email deve contenere obbligatoriamente "@" "."<br>
  * Si richiama poi il metodo della classe Clienti per registrare l'utente nel file Clienti.data.txt

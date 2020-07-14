@@ -154,9 +154,9 @@ public class Clienti {
 		JButton btnNoLogIn = new JButton("Accesso libero");
 		btnNoLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				login.btnInvia.setEnabled(false);;
-				login.cb_star.setEnabled(false);;
-				login.ta_commento.setEnabled(false);;
+				login.btnInvia.setEnabled(false);
+				login.cb_star.setEnabled(false);
+				login.ta_commento.setEnabled(false);
 				login.frmLogin.setVisible(true);
 				frmClienti.setVisible(false);
 			}
