@@ -174,7 +174,6 @@ public class LogIn {
 				}else if((!nome.isEmpty())&&(tipologia.equals(""))) {
 					JOptionPane.showMessageDialog(message,"Ricerca per nome : " + nome);
 					restaurant_data = Clienti.search_func("nome", nome);
-					System.out.println(restaurant_data.get(0).nome);
 					
 				//&&(!tipologia.equals(""))
 				}else if((nome.equals(""))&&(!tipologia.equals(""))){
