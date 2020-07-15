@@ -126,6 +126,9 @@ public class Clienti {
 					if((clienti_list.get(i).equals(ID))&&(clienti_list.get(pos+1).equals(password))) {
 						JOptionPane.showMessageDialog(message,"Accesso effettuato!");
 						login.frmLogin.setVisible(true);
+						login.btnInvia.setEnabled(true);
+						login.cb_star.setEnabled(true);
+						login.ta_commento.setEnabled(true);
 						tf_nickname.setText("");
 						passwordField.setText("");
 						frmClienti.setVisible(false);
